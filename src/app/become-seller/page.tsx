@@ -22,6 +22,10 @@ export default function BecomeSellerPage() {
     password: "",
     specialty: "",
     bio: "",
+    storeName: "",
+    phone: "",
+    city: "",
+    category: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,6 +51,10 @@ export default function BecomeSellerPage() {
           role: "seller",
           specialty: form.specialty,
           bio: form.bio,
+          storeName: form.storeName,
+          phone: form.phone,
+          city: form.city,
+          category: form.category,
           avatar: `https://picsum.photos/seed/${form.name}/200/200`,
           sales: 0,
           rating: 0,
@@ -227,7 +235,45 @@ export default function BecomeSellerPage() {
                   className="w-full px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/10 focus:border-[#ff8040] focus:outline-none transition-colors resize-none"
                 />
               </div>
+              <div>
+  <label className="text-xs text-white/40 mb-2 block">Название магазина</label>
+  <input
+    type="text"
+    value={form.storeName}
+    onChange={(e) => setForm({ ...form, storeName: e.target.value })}
+    className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10"
+  />
+</div>
 
+<div>
+  <label className="text-xs text-white/40 mb-2 block">Телефон</label>
+  <input
+    type="text"
+    value={form.phone}
+    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+    className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10"
+  />
+</div>
+
+<div>
+  <label className="text-xs text-white/40 mb-2 block">Город</label>
+  <input
+    type="text"
+    value={form.city}
+    onChange={(e) => setForm({ ...form, city: e.target.value })}
+    className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10"
+  />
+</div>
+
+<div>
+  <label className="text-xs text-white/40 mb-2 block">Категория</label>
+  <input
+    type="text"
+    value={form.category}
+    onChange={(e) => setForm({ ...form, category: e.target.value })}
+    className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/10"
+  />
+</div>
               {error && (
                 <div className="px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-semibold">
                   {error}

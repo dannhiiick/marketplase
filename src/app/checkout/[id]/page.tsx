@@ -69,21 +69,29 @@ export default function CheckoutPage() {
     await new Promise(resolve => setTimeout(resolve, 1500));
     
     try {
-      // Attempt to create order (simulated buyer 'u4' - BuyerAlex for demo)
-      await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          buyerId: "u4",
-          productId: product?.id
-        })
-      });
-    } catch (e) {
-      console.error(e);
-    }
+  const res = await fetch("/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      buyerId: "u4",
+      productId: product?.id
+    })
+  });
+
+  if (!res.ok) {
+    const data = await res.json();
+    alert(data.error || "Ошибка при создании заказа");
+    return;
+  }
+
+  setSuccess(true);
+
+} catch (e) {
+  console.error(e);
+  alert("Ошибка оплаты");
+}
     
     setProcessing(false);
-    setSuccess(true);
   };
 
   if (loading) {

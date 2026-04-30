@@ -14,7 +14,13 @@ export async function GET(req: NextRequest) {
 // POST /api/cart
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  if (!body.userId || !body.productId || !body.price) {
+ if (
+  !body.userId ||
+  !body.productId ||
+  body.price === undefined ||
+  body.price === null ||
+  Number.isNaN(Number(body.price))
+) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
   const item = db.addCartItem({

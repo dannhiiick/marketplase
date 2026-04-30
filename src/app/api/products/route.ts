@@ -12,7 +12,13 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  if (!body.title || !body.sellerId || !body.price) {
+  if (
+  !body.title ||
+  !body.sellerId ||
+  body.price === undefined ||
+  body.price === null ||
+  Number.isNaN(Number(body.price))
+) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
   const product = db.createProduct({
